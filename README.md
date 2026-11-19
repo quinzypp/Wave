@@ -25,6 +25,11 @@
 
 ## Protections Used & How Each Was Defeated
 
+> [!NOTE]
+> **They actually tried to use a VM... in JAVA. LOL.**
+>
+> Java *already* runs on a stack-based Virtual Machine, and their big-brain protection idea (`shroud.runtime.Vm`) was to write a *second* stack-based VM **in pure Java** on top of it — boxing every single `int` and `float` into `Object[]` arrays inside a giant `switch` loop that wasn't even a custom ISA, just a 1-to-1 shuffled permutation of standard JVM opcodes `0..191` sitting right there in an unobfuscated Java 8 class! You can literally decompile the entire VM interpreter in two seconds, invert the 256-byte lookup table, and dump all `741` "virtualized" methods straight back to clean Java 25 bytecode with **zero** information loss. Paying 50x interpreter overhead in a Minecraft render loop just to lose to a 200-line static script is comedy gold. Even better, their class renamer walked the source folders in alphabetical order before assigning IDs — leaking the exact sort order of every package and class in the project.
+
 The shipped JAR was protected by a multi-layered custom JVM obfuscator and virtualizer (`shroud`). Every layer was unwrapped **100% statically** using custom OW2 ASM, dataflow, and `javac` AST tooling:
 
 1. **64-bit LCG String Encryption (`Ô`)**
@@ -36,8 +41,8 @@ The shipped JAR was protected by a multi-layered custom JVM obfuscator and virtu
    - *Defeat*: Decoded the keyed call-site table statically, resolved target class vs. interface ownership across the application, Minecraft, Fabric, and JDK 25 classpaths, and rewrote all `11,737` sites back to direct `INVOKESTATIC`, `INVOKEVIRTUAL`, and `INVOKEINTERFACE` instructions.
 
 3. **Custom Stack-VM Bytecode Virtualization (`shroud.runtime.Vm` & `Λ0..Λ3`)**
-   - *Protection*: `741` application methods were gutted and replaced with `Vm.exec(programId, args)` stubs interpreted by a custom stack-based virtual machine. The VM bytecode image (`237,964` characters split across 4 constant-pool carrier classes and ZLIB-compressed) used a randomized 256-entry opcode table and an LCG-encrypted pool of `6,006` member/type references.
-   - *Defeat*: Statically inflated the VM binary image, mapped the 256-entry shuffled opcode table 1-to-1 back onto standard JVM opcodes, reconstructed per-method exception handler tables, and lifted all `741` virtualized methods back into native Java 25 bytecode.
+   - *Protection*: `741` application methods were gutted and replaced with `Vm.exec(programId, args)` stubs interpreted by a custom stack-based virtual machine — written in pure Java, running *inside* the JVM. Yes, they genuinely shipped a stack VM inside a stack VM: boxing every primitive into `Object[]` arrays to execute a shuffled 1-to-1 copy of standard JVM opcodes (`0..191`) over a ZLIB-compressed blob (`237,964` chars across 4 constant-pool carrier classes) with `6,006` LCG-encrypted member references. All of the runtime overhead of interpreting Java in Java, with zero actual ISA translation — so the entire interpreter was trivially invertible in ~200 lines of ASM.
+   - *Defeat*: Statically inflated the VM binary image, inverted the 256-entry opcode permutation table 1-to-1 back onto real JVM instructions, reconstructed per-method exception handler tables, and lifted all `741` virtualized methods straight back into native Java 25 bytecode with zero information loss.
 
 4. **Mixed Boolean-Arithmetic (MBA) Constant Obfuscation**
    - *Protection*: `7,152` `int` and `long` constants were expanded into multi-instruction `(A ^ B) - C + C` sequences to foil constant-folding and decompilers.
@@ -48,7 +53,7 @@ The shipped JAR was protected by a multi-layered custom JVM obfuscator and virtu
    - *Defeat*: Tracked constant local guard slots from method entry, simplified always-taken predicates to unconditional jumps, pruned unreachable basic blocks via control-flow reachability analysis, and recomputed JVM `StackMapTable` frames.
 
 6. **Unicode Confusable Renaming, Collision Traps & Stripped Generics/Debug Info**
-   - *Protection*: `318` classes, `1,897` fields, and `2,121` methods were renamed to 2-character Greek/Cyrillic confusables (including case-insensitive filename collisions targeting macOS/Windows filesystems), while generic `Signature` and `LocalVariableTable` attributes were stripped.
+   - *Protection*: `318` classes, `1,897` fields, and `2,121` methods were renamed to 2-character Greek/Cyrillic confusables (including case-insensitive filename collisions targeting macOS/Windows filesystems), while generic `Signature` and `LocalVariableTable` attributes were stripped. Ironically, the obfuscator walked the original class tree in deterministic ASCII path order before assigning sequential IDs, leaking the exact alphabetical position of every single package and class.
    - *Defeat*: Extracted entries using collision-safe indexing, exploited `shroud`'s preserved recursive directory/ASCII sort-order invariant alongside `51` unobfuscated Mixin/Record/Shader anchors to recover the original package and class hierarchy, reconstructed erased generics via bytecode dataflow inference, restored inner-class access flags from `InnerClasses` metadata, decompiled with Vineflower `1.12.0`, and renamed all `3,083` remaining method/lambda parameters using JDK 25's `JavacTask` AST symbol resolver.
 
 ---
