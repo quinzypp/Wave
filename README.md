@@ -2,6 +2,13 @@
 
 **openadapt** is a clean, standalone Java 25 source reconstruction of the **Adapt v3 (`3.0.4`)** client mod for **Minecraft 26.3 (Fabric)**. All post-build obfuscation and bytecode virtualization layers have been statically reversed back into readable, idiomatic Java source (`269` `.java` files / `367` classes), and all vendor licensing, hardware fingerprinting, and telemetry hooks have been disconnected so the client builds and runs completely offline.
 
+> [!IMPORTANT]
+> **Official Mirrors & Anti-DMCA Backup**
+> - **GitHub**: https://github.com/yxzeroo/openadapt
+> - **Anti-DMCA Backup Mirror**: https://git.yxz.st/yxzero/openadapt
+>
+> Please **bookmark and save** https://git.yxz.st/yxzero/openadapt (or clone a local mirror) in case the GitHub repository is ever taken down via DMCA.
+
 ---
 
 ## Tech Stack & Versions
