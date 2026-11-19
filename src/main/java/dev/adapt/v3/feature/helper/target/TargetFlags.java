@@ -8,23 +8,23 @@ public final class TargetFlags {
     public static final int LOCAL_PLAYER = 16;
 
     public static int pack(boolean flag, boolean flag2, boolean flag3, boolean flag4) {
-        byte b0 = 0;
+        int flags = 0;
         if (flag) {
-            b0 |= 1;
+            flags |= 1;
         }
 
         if (flag2) {
-            b0 |= 2;
+            flags |= 2;
         }
 
         if (flag3) {
-            b0 |= 4;
+            flags |= 4;
         }
 
         if (flag4) {
-            b0 |= 8;
+            flags |= 8;
         }
 
-        return b0;
+        return flags;
     }
 }

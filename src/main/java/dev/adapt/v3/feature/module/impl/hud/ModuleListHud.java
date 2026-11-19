@@ -343,24 +343,24 @@ public final class ModuleListHud extends HudModule {
         float f = this.resolveX(i);
         float f1 = this.resolveY(j);
         float f2 = 0.25F;
-        byte b0 = 0;
+        int mask = 0;
         if (!flag && f <= 0.25F) {
-            b0 |= 1;
+            mask |= 1;
         }
 
         if (flag && f + this.getScaledWidth() >= i - 0.25F) {
-            b0 |= 2;
+            mask |= 2;
         }
 
         if (f1 <= 0.25F) {
-            b0 |= 4;
+            mask |= 4;
         }
 
         if (f1 + this.getScaledHeight() >= j - 0.25F) {
-            b0 |= 8;
+            mask |= 8;
         }
 
-        return b0;
+        return mask;
     }
 
     public float getScoreboardOffset(int first, int second) {

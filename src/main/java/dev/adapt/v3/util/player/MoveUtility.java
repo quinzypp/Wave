@@ -72,8 +72,8 @@ public final class MoveUtility {
     }
 
     public static boolean isBlockUnder(double value) {
-        for (byte b0 = 0; b0 < value; b0 += 2) {
-            if (hasCollisionAtOffset(0.0, -b0, 0.0)) {
+        for (int offset = 0; offset < value; offset += 2) {
+            if (hasCollisionAtOffset(0.0, -offset, 0.0)) {
                 return true;
             }
         }

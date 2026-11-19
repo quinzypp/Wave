@@ -15,8 +15,8 @@ public final class MultiBooleanProperty extends Property<Map<String, Boolean>> {
         super(text);
         Map<String, Boolean> linkedhashmap = new LinkedHashMap<>();
 
-        for (byte b0 = 0; b0 + 1 < objects.length; b0 += 2) {
-            linkedhashmap.put((String)objects[b0], (Boolean)objects[b0 + 1]);
+        for (int i = 0; i + 1 < objects.length; i += 2) {
+            linkedhashmap.put((String)objects[i], (Boolean)objects[i + 1]);
         }
 
         this.options = List.copyOf(linkedhashmap.keySet());

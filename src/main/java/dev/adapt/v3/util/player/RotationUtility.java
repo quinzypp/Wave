@@ -99,9 +99,9 @@ public final class RotationUtility {
             arraylist.add(f7 + 180.0F);
         }
 
-        for (byte b0 = 45; b0 < 180; b0 += 90) {
-            arraylist.add(f7 + b0);
-            arraylist.add(f7 - b0);
+        for (int angle = 45; angle < 180; angle += 90) {
+            arraylist.add(f7 + angle);
+            arraylist.add(f7 - angle);
         }
 
         arraylist.sort(Comparator.comparingDouble(value2 -> Mth.degreesDifferenceAbs(value2, rotation.x)));

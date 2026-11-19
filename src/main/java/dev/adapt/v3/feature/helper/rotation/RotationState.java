@@ -31,18 +31,18 @@ public final class RotationState implements Listener {
             double d0 = event.getSensitivityMultiplier();
             double d1 = event.getDeltaX() * d0;
             double d2 = event.getDeltaY() * d0;
-            byte b0 = 1;
+            int invertY = 1;
             if (MC.options.invertMouseY().get()) {
-                b0 = -1;
+                invertY = -1;
             }
 
-            byte b1 = 1;
+            int invertX = 1;
             if (MC.options.invertMouseX().get()) {
-                b1 = -1;
+                invertX = -1;
             }
 
-            float f = (float)(d1 * b1) * 0.15F;
-            float f1 = (float)(d2 * b0) * 0.15F;
+            float f = (float)(d1 * invertX) * 0.15F;
+            float f1 = (float)(d2 * invertY) * 0.15F;
             float f2 = this.cameraRotation.x + f;
             float f3 = this.cameraRotation.y + f1;
             this.cameraRotation = new Vec2(f2, Math.clamp(f3 % 360.0F, -90.0F, 90.0F));

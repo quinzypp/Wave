@@ -51,9 +51,9 @@ public final class HudEditorScreen extends BaseScreen {
         Render2D.fillRect(graphics, 0.0F, 0.0F, this.width, this.height, ColorUtility.withAlpha(657936, (int)(90.0F * f)));
         int i = ColorUtility.withAlpha(16777215, (int)(34.0F * f));
 
-        for (byte b0 = 16; b0 < this.width; b0 += 16) {
-            for (byte b1 = 16; b1 < this.height; b1 += 16) {
-                Render2D.fillRect(graphics, b0, b1, 0.75F, 0.75F, i);
+        for (int x = 16; x < this.width; x += 16) {
+            for (int y = 16; y < this.height; y += 16) {
+                Render2D.fillRect(graphics, x, y, 0.75F, 0.75F, i);
             }
         }
     }
