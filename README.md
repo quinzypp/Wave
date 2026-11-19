@@ -5,9 +5,9 @@
 > [!IMPORTANT]
 > **Official Mirrors & Anti-DMCA Backup**
 > - **GitHub**: https://github.com/yxzeroo/openadapt
-> - **Anti-DMCA Backup Mirror**: https://git.yxz.st/yxzero/openadapt
+> - **Anti-DMCA Backup Mirror**: https://deobf.su/yxzero/openadapt
 >
-> Please **bookmark and save** https://git.yxz.st/yxzero/openadapt (or clone a local mirror) in case the GitHub repository is ever taken down via DMCA.
+> Please **bookmark and save** https://deobf.su/yxzero/openadapt (or clone a local mirror) in case the GitHub repository is ever taken down via DMCA.
 
 ---
 
