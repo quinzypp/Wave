@@ -1,0 +1,21 @@
+{
+	"schemaVersion": 1,
+	"id": "adaptv3",
+	"version": "3.0.4",
+	"name": "AdaptV3",
+	"description": "Adapt v3.0.4",
+	"authors": ["postdevv"],
+	"license": "MIT",
+	"icon": "assets/adaptv3/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": ["dev.adapt.v3.AdaptClient"]
+	},
+	"mixins": ["adaptv3.mixins.json"],
+	"depends": {
+		"fabricloader": ">=0.20.1",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}

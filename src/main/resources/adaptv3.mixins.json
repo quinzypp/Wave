@@ -1,0 +1,15 @@
+{
+	"required": true,
+	"package": "dev.adapt.v3.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"client": ["CameraMixin", "FramerateLimitTrackerMixin", "GlobalSettingsUniformMixin", "SoundManagerMixin", "GuiRendererMixin", "LoadingOverlayMixin","GuiGraphicsInvoker", "GuiMixin", "KeyboardHandlerMixin", "LightmapRenderStateExtractorMixin", "MinecraftAccessor","MouseHandlerMixin",
+		"MouseHandlerAccessor", "KeyMappingAccessor", "MinecraftMixin", "EntityMixin", "LivingEntityMixin", "LocalPlayerMixin",
+		"FirstPersonHandsAndItemsMixin", "FirstPersonHandsAndItemsRendererMixin", "AvatarRendererMixin", "PlayerMixin", "HumanoidModelMixin", "ItemInHandLayerMixin", "KeyboardInputMixin",
+		"LivingEntityAccessor", "MultiPlayerGameModeMixin", "MultiPlayerGameModeAccessor", "HudSlotMixin", "ConnectionMixin", "ChatListenerMixin", "ChatScreenMixin", "ScreenMixin", "LocalPlayerAccessor", "GameRendererMixin", "ClientClockInstanceMixin", "ClientPacketListenerMixin", "DeltaTrackerTimerMixin", "BlockStateBaseMixin", "ServerboundMovePlayerPacketAccessor", "PlayerReachMixin", "ReachAttackRangeMixin", "ReachAttackMixin", "LocalPlayerPiercingMixin", "LevelExtractorMixin"],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}
